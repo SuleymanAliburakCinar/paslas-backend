@@ -1,0 +1,78 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# Java derleme çıktıları
+/bin/
+/build/
+/target/
+
+# IDE dosyaları
+*.iml
+.idea/
+/*.iws
+*.ipr
+*.class
+
+# OS'ye özel dosyalar
+.DS_Store
+Thumbs.db
+
+# Maven & Gradle
+.mvn/
+!/.mvn/wrapper/maven-wrapper.jar
+mvnw.cmd
+mvnw
+.gradle/
+build/
+
+# Log dosyaları
+*.log
+
+# Geçici dosyalar
+*.tmp
+*.swp
+
+# Test raporları
+/test-output/
+
+# IntelliJ out klasörü
+/out/
+
+# VS Code
+.vscode/
+
+# Paketleme çıktıları
+*.jar
+*.war
+*.ear

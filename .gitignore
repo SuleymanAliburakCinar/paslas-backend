@@ -38,10 +38,8 @@ build/
 /target/
 
 # IDE dosyaları
-*.iml
 .idea/
 /*.iws
-*.ipr
 *.class
 
 # OS'ye özel dosyalar
@@ -54,7 +52,6 @@ Thumbs.db
 mvnw.cmd
 mvnw
 .gradle/
-build/
 
 # Log dosyaları
 *.log
@@ -68,9 +65,6 @@ build/
 
 # IntelliJ out klasörü
 /out/
-
-# VS Code
-.vscode/
 
 # Paketleme çıktıları
 *.jar

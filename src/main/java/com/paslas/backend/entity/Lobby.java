@@ -1,28 +1,47 @@
 package com.paslas.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
-@Data
+@Entity
+@Table(name = "lobbies")
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Lobby {
+@Getter
+@Setter
+@Builder
+public class Lobby extends BaseEntity {
 
     @Id
-    private String id;
-    private LocalDateTime createdAt;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
+
     private String name;
 
-    public Lobby(String name) {
-        this.id = UUID.randomUUID().toString();
-        this.createdAt = LocalDateTime.now();
-        this.name = name;
+    @OneToMany(
+            mappedBy = "lobby",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private Set<LobbyMember> members = new HashSet<>();
+
+    public void addMember(User user, LobbyMember.Role role) {
+        LobbyMember lobbyMember = LobbyMember.builder()
+                .lobby(this)
+                .user(user)
+                .role(role)
+                .build();
+        members.add(lobbyMember);
+    }
+
+    public void removeMember(User user) {
+        members.removeIf(member -> member.getUser().equals(user));
     }
 }

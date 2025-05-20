@@ -12,3 +12,9 @@ spring:
         format_sql: true
   profiles:
     active: dev
+
+application:
+  security:
+    jwt:
+      secret-key: dGhpc19pc19hX3Zlcnlfc2VjdXJlX2tleV9mb3Jfand0IQ==
+      expiration: 86400000 # a day

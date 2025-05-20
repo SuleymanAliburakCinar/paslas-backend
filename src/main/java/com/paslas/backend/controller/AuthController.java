@@ -1,7 +1,10 @@
 package com.paslas.backend.controller;
 
+import com.paslas.backend.dto.AuthenticationRequest;
+import com.paslas.backend.dto.AuthenticationResponse;
 import com.paslas.backend.dto.UserRegistrationDto;
 import com.paslas.backend.dto.UserResponseDto;
+import com.paslas.backend.service.AuthService;
 import com.paslas.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register")
     public ResponseEntity<UserResponseDto> register(@Valid @RequestBody UserRegistrationDto dto) {
         return ResponseEntity.ok(userService.createUser(dto));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }

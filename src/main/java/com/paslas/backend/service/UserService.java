@@ -8,6 +8,7 @@ import com.paslas.backend.exception.UsernameAlreadyExistsException;
 import com.paslas.backend.mapper.UserMapper;
 import com.paslas.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,10 @@ public class UserService {
     public UserResponseDto createUser(UserRegistrationDto dto) {
         User user = saveUser(dto);
         return userMapper.userToUserResponseDto(user);
+    }
+
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 }

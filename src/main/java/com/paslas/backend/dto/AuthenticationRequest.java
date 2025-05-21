@@ -1,4 +1,4 @@
 package com.paslas.backend.dto;
 
-public record AuthenticationRequest(String username, String password) {
+public record AuthenticationRequest(String username, String password, boolean rememberMe) {
 }

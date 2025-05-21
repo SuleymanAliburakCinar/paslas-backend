@@ -17,4 +17,9 @@ application:
   security:
     jwt:
       secret-key: dGhpc19pc19hX3Zlcnlfc2VjdXJlX2tleV9mb3Jfand0IQ==
-      expiration: 86400000 # a day
+      expiration: 604800000 # 7 day
+    cookie:
+      expiration: 604800 # 7 day
+  cors:
+    allowed-origins:
+      - http://localhost:3000

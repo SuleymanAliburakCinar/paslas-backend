@@ -24,11 +24,11 @@ public class UserService {
 
     private User saveUser(UserRegistrationDto dto) {
         if (dto.getEmail() != null && userRepository.existsByEmail(dto.getEmail())) {
-            throw new EmailAlreadyExistsException(dto.getEmail());
+            throw new EmailAlreadyExistsException();
         }
 
         if (userRepository.existsByUsername(dto.getUsername())) {
-            throw new UsernameAlreadyExistsException(dto.getUsername());
+            throw new UsernameAlreadyExistsException();
         }
 
         if (!dto.getPassword().equals(dto.getConfirmPassword())) {

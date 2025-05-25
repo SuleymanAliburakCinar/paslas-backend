@@ -16,14 +16,7 @@ public class GlobalExceptionHandler {
             EmailAlreadyExistsException ex,
             HttpServletRequest request
     ) {
-        ErrorResponse response = ErrorResponse.builder()
-                .timestamp(Instant.now())
-                .status(HttpStatus.CONFLICT.value())
-                .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .message(ex.getMessage())
-                .path(request.getRequestURI())
-                .build();
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler(UsernameAlreadyExistsException.class)
@@ -31,13 +24,33 @@ public class GlobalExceptionHandler {
             UsernameAlreadyExistsException ex,
             HttpServletRequest request
     ) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT, request);
+    }
+
+    @ExceptionHandler(LobbyNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleLobbyNotFoundException(
+            LobbyNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT, request);
+    }
+
+    @ExceptionHandler(AlreadyInLobbyException.class)
+    public ResponseEntity<ErrorResponse> handleAlreadyInLobbyException(
+            AlreadyInLobbyException ex,
+            HttpServletRequest request
+    ) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT, request);
+    }
+
+    private ResponseEntity<ErrorResponse> buildErrorResponse(String msg, HttpStatus status, HttpServletRequest request) {
         ErrorResponse response = ErrorResponse.builder()
                 .timestamp(Instant.now())
-                .status(HttpStatus.CONFLICT.value())
-                .error(HttpStatus.CONFLICT.getReasonPhrase())
-                .message(ex.getMessage())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(msg)
                 .path(request.getRequestURI())
                 .build();
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(response, status);
     }
 }

@@ -7,7 +7,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "lobby_members")
+@Table(
+        name = "lobby_members",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"lobby_id", "user_id"})
+        })
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,11 +24,11 @@ public class LobbyMember {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "lobby_id", nullable = false, updatable = false, unique = true)
+    @JoinColumn(name = "lobby_id", nullable = false, updatable = false)
     private Lobby lobby;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false, updatable = false, unique = true)
+    @JoinColumn(name = "user_id", nullable = false, updatable = false)
     private User user;
 
     @Enumerated(EnumType.STRING)

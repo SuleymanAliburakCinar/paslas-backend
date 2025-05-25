@@ -20,6 +20,9 @@ application:
       expiration: 604800000 # 7 day
     cookie:
       expiration: 604800 # 7 day
+    join-code:
+      charset: "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+      length: 6
   cors:
     allowed-origins:
       - http://localhost:3000

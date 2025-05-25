@@ -30,7 +30,7 @@ class UserServiceTest {
         when(userRepository.existsByEmail(registrationDto.getEmail())).thenReturn(true);
 
         EmailAlreadyExistsException ex = assertThrows(EmailAlreadyExistsException.class, () -> userService.createUser(registrationDto));
-        assertEquals("Email already exist: " + registrationDto.getEmail(), ex.getMessage());
+        assertEquals("Bu email zaten kullanılıyor", ex.getMessage());
     }
 
     @Test
@@ -41,7 +41,7 @@ class UserServiceTest {
         when(userRepository.existsByUsername(registrationDto.getUsername())).thenReturn(true);
 
         UsernameAlreadyExistsException ex = assertThrows(UsernameAlreadyExistsException.class, () -> userService.createUser(registrationDto));
-        assertEquals("Username already exist: " + registrationDto.getUsername(), ex.getMessage());
+        assertEquals("Bu kullanıcı adı kullanılıyor", ex.getMessage());
     }
 
     @Test

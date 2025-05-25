@@ -3,7 +3,6 @@ package com.paslas.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -24,6 +23,10 @@ public class Lobby extends BaseEntity {
 
     private String name;
 
+    @Column(unique = true)
+    private String joinCode;
+
+    @Builder.Default
     @OneToMany(
             mappedBy = "lobby",
             cascade = CascadeType.ALL,
@@ -43,5 +46,9 @@ public class Lobby extends BaseEntity {
 
     public void removeMember(User user) {
         members.removeIf(member -> member.getUser().equals(user));
+    }
+
+    public boolean hasMember(User user) {
+        return members.stream().anyMatch(m -> m.getUser().getId().equals(user.getId()));
     }
 }

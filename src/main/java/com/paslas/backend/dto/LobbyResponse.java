@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Data
-public class LobbyResponseDto {
+public class LobbyResponse {
 
     private UUID id;
     private String name;

@@ -1,6 +1,6 @@
 package com.paslas.backend.controller;
 
-import com.paslas.backend.dto.LobbyResponseDto;
+import com.paslas.backend.dto.LobbyResponse;
 import com.paslas.backend.service.LobbyMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class UserController {
     private final LobbyMemberService lobbyMemberService;
 
     @GetMapping("/{userId}/lobbies")
-    public ResponseEntity<List<LobbyResponseDto>> getUserLobbies(@PathVariable UUID userId) {
+    public ResponseEntity<List<LobbyResponse>> getUserLobbies(@PathVariable UUID userId) {
 
         return ResponseEntity.ok(lobbyMemberService.getLobbiesByUserId(userId));
     }

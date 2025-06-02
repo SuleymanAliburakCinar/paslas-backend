@@ -1,7 +1,6 @@
 package com.paslas.backend.service;
 
 import com.paslas.backend.dto.ParticipationDto;
-import com.paslas.backend.dto.ParticipationResponseDto;
 import com.paslas.backend.entity.Event;
 import com.paslas.backend.entity.Participation;
 import com.paslas.backend.entity.User;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.FormatterClosedException;
 import java.util.List;
 import java.util.Optional;
@@ -102,25 +100,12 @@ public class ParticipationService {
         leave(event, user);
     }
 
-    private ParticipationResponseDto getParticipationsGroupedByStatus(Event event) {
+    private List<ParticipationDto> getParticipationsGroupedByStatus(Event event) {
         List<Participation> participations = participationRepository.findAllByEvent(event);
-        List<ParticipationDto> confirmed = new ArrayList<>();
-        List<ParticipationDto> waitlisted = new ArrayList<>();
-        List<ParticipationDto> declined = new ArrayList<>();
-
-        for (Participation p : participations) {
-            ParticipationDto dto = participationMapper.participationToParticipationDto(p);
-            switch (p.getStatus()) {
-                case CONFIRMED -> confirmed.add(dto);
-                case WAITLISTED -> waitlisted.add(dto);
-                case DECLINED -> declined.add(dto);
-            }
-        }
-
-        return new ParticipationResponseDto(confirmed, waitlisted, declined);
+        return participations.stream().map(participationMapper::participationToParticipationDto).toList();
     }
 
-    public ParticipationResponseDto getParticipationList(long eventId) {
+    public List<ParticipationDto> getParticipationList(long eventId) {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException("Etkinlik bulunamadı"));
         return getParticipationsGroupedByStatus(event);

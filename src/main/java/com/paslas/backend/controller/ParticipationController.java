@@ -1,7 +1,6 @@
 package com.paslas.backend.controller;
 
 import com.paslas.backend.dto.ParticipationDto;
-import com.paslas.backend.dto.ParticipationResponseDto;
 import com.paslas.backend.entity.User;
 import com.paslas.backend.security.CustomUserDetails;
 import com.paslas.backend.service.ParticipationService;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/event/")
@@ -34,7 +35,7 @@ public class ParticipationController {
     }
 
     @GetMapping("/participations/{eventId}")
-    public ResponseEntity<ParticipationResponseDto> getParticipations(@PathVariable long eventId) {
+    public ResponseEntity<List<ParticipationDto>> getParticipations(@PathVariable long eventId) {
         return ResponseEntity.ok(participationService.getParticipationList(eventId));
     }
 }

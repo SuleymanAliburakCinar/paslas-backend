@@ -1,5 +1,6 @@
 package com.paslas.backend.dto;
 
+import com.paslas.backend.entity.LobbyMember;
 import lombok.Data;
 
 import java.util.Set;
@@ -11,4 +12,5 @@ public class LobbyResponse {
     private UUID id;
     private String name;
     private Set<LobbyMemberDto> members;
+    private LobbyMember.Role currentUserRole;
 }

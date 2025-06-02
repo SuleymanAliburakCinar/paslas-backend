@@ -1,6 +1,7 @@
 package com.paslas.backend.dto;
 
 import com.paslas.backend.entity.Event;
+import com.paslas.backend.entity.User;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ public class EventRequest {
     @NotNull
     private UUID lobbyId;
 
-    private UUID userId;
+    private User createdBy;
 
     @NotNull
     @NotBlank

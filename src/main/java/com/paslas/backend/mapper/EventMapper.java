@@ -12,7 +12,5 @@ public interface EventMapper {
     @Mapping(source = "createdBy.username", target = "createdBy")
     EventResponse eventToEventResponse(Event event);
 
-    @Mapping(source = "lobbyId", target = "lobby.id")
-    @Mapping(source = "userId", target = "createdBy.id")
     Event eventRequestToEvent(EventRequest eventRequest);
 }

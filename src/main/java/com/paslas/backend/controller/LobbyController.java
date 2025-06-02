@@ -41,6 +41,6 @@ public class LobbyController {
         if(!lobby.hasMember(user)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bu lobby'e erişim yetkiniz yok.");
         }
-        return ResponseEntity.ok(lobbyMapper.lobbyToLobbyResponseDto(lobby));
+        return ResponseEntity.ok(lobbyMapper.lobbyToLobbyResponseDto(lobby, user.getUsername()));
     }
 }

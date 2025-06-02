@@ -3,9 +3,11 @@ package com.paslas.backend.service;
 import com.paslas.backend.dto.EventRequest;
 import com.paslas.backend.dto.EventResponse;
 import com.paslas.backend.entity.Event;
+import com.paslas.backend.entity.Lobby;
 import com.paslas.backend.exception.NotFoundException;
 import com.paslas.backend.mapper.EventMapper;
 import com.paslas.backend.repository.EventRepository;
+import com.paslas.backend.repository.LobbyRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,20 +20,25 @@ import java.util.UUID;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final LobbyRepository lobbyRepository;
     private final EventMapper eventMapper;
 
     private Event save(Event event) {
         return eventRepository.save(event);
     }
 
-    private Event save(EventRequest request) {
-        Event event = eventMapper.eventRequestToEvent(request);
-        return save(event);
+    public EventResponse createEvent(EventRequest request) {
+        Event event = save(createEventFromRequest(request));
+        return eventMapper.eventToEventResponse(event);
     }
 
-    public EventResponse createEvent(EventRequest request) {
-        Event event = save(request);
-        return eventMapper.eventToEventResponse(event);
+    private Event createEventFromRequest(EventRequest request) {
+        Lobby lobby = lobbyRepository.findById(request.getLobbyId())
+                .orElseThrow(() -> new NotFoundException("Lobby bulunamadı"));
+
+        Event event = eventMapper.eventRequestToEvent(request);
+        event.setLobby(lobby);
+        return event;
     }
 
     private Event findById(long id) {

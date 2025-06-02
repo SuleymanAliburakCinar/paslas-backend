@@ -23,7 +23,7 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<EventResponse> createEvent(@RequestBody @Valid EventRequest request, @AuthenticationPrincipal CustomUserDetails userDetails) {
-        request.setUserId(userDetails.getUser().getId());
+        request.setCreatedBy(userDetails.getUser());
         return ResponseEntity.ok(eventService.createEvent(request));
     }
 
@@ -32,7 +32,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getById(id));
     }
 
-    @GetMapping("/{lobbyId}")
+    @GetMapping("/getAll/{lobbyId}")
     public ResponseEntity<List<EventResponse>> getAllByLobbyId(@PathVariable @NotNull UUID lobbyId) {
         return ResponseEntity.ok(eventService.getAll(lobbyId));
     }

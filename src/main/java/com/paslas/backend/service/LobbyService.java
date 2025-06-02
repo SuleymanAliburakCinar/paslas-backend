@@ -1,6 +1,6 @@
 package com.paslas.backend.service;
 
-import com.paslas.backend.dto.LobbyResponseDto;
+import com.paslas.backend.dto.LobbyResponse;
 import com.paslas.backend.entity.Lobby;
 import com.paslas.backend.entity.LobbyMember;
 import com.paslas.backend.entity.User;
@@ -40,7 +40,7 @@ public class LobbyService {
     }
 
     @Transactional
-    public LobbyResponseDto createLobby(User user, String name) {
+    public LobbyResponse createLobby(User user, String name) {
         Lobby lobby = saveLobby(user, name);
         return lobbyMapper.lobbyToLobbyResponseDto(lobby);
     }
@@ -69,7 +69,7 @@ public class LobbyService {
     }
 
     @Transactional
-    public LobbyResponseDto joinLobby(User user, String joinCode) {
+    public LobbyResponse joinLobby(User user, String joinCode) {
         Lobby lobby = lobbyRepository.findByJoinCode(joinCode)
                 .orElseThrow(LobbyNotFoundException::new);
 

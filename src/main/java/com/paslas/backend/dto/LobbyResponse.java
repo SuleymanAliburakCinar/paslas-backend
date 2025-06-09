@@ -11,6 +11,7 @@ public class LobbyResponse {
 
     private UUID id;
     private String name;
+    private String joinCode;
     private Set<LobbyMemberDto> members;
     private LobbyMember.Role currentUserRole;
 }

@@ -31,5 +31,5 @@ public class EventRequest {
     @Min(value = 1, message = "Kapasite 0'dan büyük olmalıdır.")
     private int capacity;
 
-    private Event.EventStatus status;
+    private Event.EventStatus status = Event.EventStatus.OPEN;
 }

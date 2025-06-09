@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 public interface LobbyMemberMapper {
 
     @Mapping(source = "user.username", target = "username")
+    @Mapping(source = "user.id", target = "userId")
     LobbyMemberDto toDto(LobbyMember lobbyMember);
 }

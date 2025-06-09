@@ -34,7 +34,7 @@ public class EventService {
 
     private Event createEventFromRequest(EventRequest request) {
         Lobby lobby = lobbyRepository.findById(request.getLobbyId())
-                .orElseThrow(() -> new NotFoundException("Lobby bulunamadı"));
+                .orElseThrow(() -> new NotFoundException("Lobi bulunamadı"));
 
         Event event = eventMapper.eventRequestToEvent(request);
         event.setLobby(lobby);

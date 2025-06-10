@@ -4,6 +4,7 @@ import com.paslas.backend.dto.UserRegistrationDto;
 import com.paslas.backend.dto.UserResponseDto;
 import com.paslas.backend.entity.User;
 import com.paslas.backend.exception.EmailAlreadyExistsException;
+import com.paslas.backend.exception.NotFoundException;
 import com.paslas.backend.exception.UsernameAlreadyExistsException;
 import com.paslas.backend.mapper.UserMapper;
 import com.paslas.backend.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -50,8 +52,20 @@ public class UserService {
         return userMapper.userToUserResponseDto(user);
     }
 
+    public UserResponseDto updateEmail(UUID id, String email){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Bu id ile bir kullanıcı bulunamadı"));
+        user.setEmail(email);
+        return userMapper.userToUserResponseDto(userRepository.save(user));
+    }
+
     public User getByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
+    }
+
+    public User getById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Bu id ile bir kullanıcı bulunamadı"));
     }
 }

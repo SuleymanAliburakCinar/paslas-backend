@@ -1,7 +1,7 @@
 ## paslas-backend
 
-**Kısa Özet:**
-Kullanıcıların lobi (lobby) oluşturup/katılabildiği, yetkili kullanıcıların bu lobilerde etkinlikler (event) tanımlayıp diğer katılımcıların katılım durumunu yönetebildiği, kapasite ve bekleme listesi mekanizmasıyla katılımcı trafiğinin kolayca izlenip yönetilebildiği, başlangıçta halı saha organizasyonları için geliştirilen ancak generic yapısıyla farklı tip etkinliklere de adapte edilebilen bir backend servisi.
+**Özet:**
+Kullanıcıların lobi (lobby) oluşturup/katılabildiği, yetkili kullanıcıların bu lobilerde etkinlikler (event) tanımlayıp diğer katılımcıların katılım durumunu yönetebildiği, kapasite ve bekleme listesi mekanizmasıyla katılımcı trafiğinin kolayca izlenip yönetilebildiği, başlangıçta halı saha organizasyonları için geliştirilen ancak generic yapısıyla farklı tip etkinliklere de adapte edilebilen bir backend servisi. Frontend için [tıklayınız](https://github.com/SuleymanAliburakCinar/paslas-frontend)
 
 ---
 
